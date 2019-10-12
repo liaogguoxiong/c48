@@ -8,9 +8,10 @@
 '''
 
 from verification_dispose import *
-from  pytesseract import image_to_string
+from pytesseract import image_to_string
 
 def recognize_code(path):
+
     path1="C:/2/verfy_code_1.png"
 
     rep = {
