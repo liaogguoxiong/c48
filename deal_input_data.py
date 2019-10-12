@@ -23,19 +23,19 @@ def deal_method():
     dic={}  # 利用字典的唯一性,去掉相同的ip地址
 
     for i in r:
-        r_l=i.split()  #把换行符去掉
-        # print(r_l)
-        l=re.split("-",r_l[0])  #r_l是一个字段,r_l[0]取出其值
+        if i != "\n":       #去掉输入文件多余的空行
+            r_l=i.split()   #把换行符去掉
+            # print(r_l)
+            l=re.split("-",r_l[0])  #r_l是一个字段,r_l[0]取出其值
 
-        """
-        把ip地址作为key值,加入空字典中,
-        由于唯一性,相同的ip地址会被去掉
-        """
-        dic[l[0]]="1"
-        res.append(l)
+            """
+            把ip地址作为key值,加入空字典中,
+            由于唯一性,相同的ip地址会被去掉
+            """
+            dic[l[0]]="1"
+            res.append(l)
 
-    # print(res)
-    # print(dic)
+    # print(len(res))
 
     d1={}   #用于存放key值为ip地址,value为由税号和分机号组成的字典
 
@@ -52,17 +52,6 @@ def deal_method():
 
 
     return d1
-    #
-    # print(d1)
-    # n=0
-    # for d in d1:
-    #     for l in d1[d]:
-    #         print(l)
-    #         n+=1
-    #
-    # print(n)
-    #
-
 
 
 
