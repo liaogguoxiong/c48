@@ -17,7 +17,7 @@ from logging_class import *
 
 class c48_sys():
 
-    def __init__(self,ipp):
+    def __init__(self,ipp,uname="admin",passwd="Aisino123+"):
         """
         :param ipp:ip加端口号
         """
@@ -25,11 +25,13 @@ class c48_sys():
         self.login_url = 'http://{}/zzs_kpfw_manager/login.htm'.format(ipp)  # c48登录的url
         self.base_url = 'http://{}/zzs_kpfw_manager'.format(ipp)  # 跳转到其他功能的基础url
         self.driver = webdriver.Chrome()   # 实例化selenium.webdriver
+        self.uname=uname
+        self.passwd=passwd
         
 
 
 
-    def login_c48(self,uname="admin",passwd="Aisino123+"):
+    def login_c48(self,):
         """
         实现登录c48的功能,识别验证码
         :return: 0 表示登录成功
@@ -104,11 +106,11 @@ class c48_sys():
             输入账号密码验证码
             提交登录
             """
-            self.driver.find_element_by_id("user_account").send_keys(uname)   # 输入账号
+            self.driver.find_element_by_id("user_account").send_keys(self.uname)   # 输入账号
             m3="输入账号....."
             rz.log(m3)
             time.sleep(1)
-            self.driver.find_element_by_id("password").send_keys(passwd)  # 输入密码
+            self.driver.find_element_by_id("password").send_keys(self.passwd)  # 输入密码
             m4="输入密码....."
             rz.log(m4)
             time.sleep(1)
@@ -246,19 +248,19 @@ rz=rizhi()     # 实例化日志的对象
 rz.send_to_file(log_path)     # 输出到日志文件中
 rz.send_to_stdout()        #输出到屏幕
 
-for ipp in info:
-    cs=c48_sys(ipp)
-    value=cs.login_c48()
-    if value == 0:
-        for i in info[ipp]:
-            shuihao=i[0]
-            fjh=i[1]
-            cs.huizong_fp(shuihao,fjh)
-            rz.log("\n\n\n")
+# for ipp in info:
+#     cs=c48_sys(ipp)
+#     value=cs.login_c48()
+#     if value == 0:
+#         for i in info[ipp]:
+#             shuihao=i[0]
+#             fjh=i[1]
+#             cs.huizong_fp(shuihao,fjh)
+#             rz.log("\n\n\n")
 
 
             
-    cs.close_browse()
+    # cs.close_browse()
 
 
 
