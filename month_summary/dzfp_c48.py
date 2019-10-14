@@ -8,12 +8,10 @@
 '''
 
 from selenium import webdriver
-import time,datetime,os
-from  PIL import Image
-from recognize_verify_code import *
+import time,datetime
+from month_summary.recognize_verify_code import *
 from selenium.webdriver.support.select import Select
-from deal_input_data import *
-from logging_class import *
+from month_summary.logging_class import *
 
 class c48_sys():
 
@@ -230,6 +228,37 @@ class c48_sys():
 
 
 
+    def service_status(self,shuihao):
+        """
+        查看金税盘的服务状态
+        需要传入公司的税号
+        :param shuihao:公司的税号
+        :return:
+        """
+        m1="打开{}的服务状态页面....".format(shuihao)
+        m2="输入税号{}".format(shuihao)
+        m3="点击查询"
+
+        ss_url="/statistic/serviceStatus/list.htm"
+        target_url=self.base_url+ss_url
+        self.driver.get(target_url)
+        rz.log(m1)
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(8)
+        time.sleep(2)
+        self.driver.find_element_by_id("_easyui_textbox_input3").send_keys(shuihao)
+        rz.log(m2)
+        time.sleep(2)
+        self.driver.find_element_by_id("query").click()
+        rz.log(m3)
+        time.sleep(2)
+        status=self.driver.find_element_by_xpath("/html[1]/body[1]/form[2]/div[2]/table[1]/tbody[1]/tr[1]/td[6]/span[1]").text
+        m4="获取到{}的服务状态为:{}".format(shuihao,status)
+        time.sleep(2)
+        return status
+
+
+
     def close_browse(self):
         time.sleep(3)
         self.driver.quit()
@@ -238,29 +267,16 @@ class c48_sys():
 # shuihao="911100000828144374"
 # fjh="1"
 
-info=deal_method()
+
 
 """
 初始化日志
 """
-log_path = "D:/python_project/c48/log.log"     #日志的保存路径
+log_path = "D:/python_project/c48/month_summary/log.log"     #日志的保存路径
 rz=rizhi()     # 实例化日志的对象
 rz.send_to_file(log_path)     # 输出到日志文件中
 rz.send_to_stdout()        #输出到屏幕
 
-# for ipp in info:
-#     cs=c48_sys(ipp)
-#     value=cs.login_c48()
-#     if value == 0:
-#         for i in info[ipp]:
-#             shuihao=i[0]
-#             fjh=i[1]
-#             cs.huizong_fp(shuihao,fjh)
-#             rz.log("\n\n\n")
-
-
-            
-    # cs.close_browse()
 
 
 

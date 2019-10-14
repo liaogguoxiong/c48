@@ -2,22 +2,18 @@
 @author: lgx
 @Email:297979949@qq.com
 @project: c48
-@file: main_process.py
+@file: export_month_summary.py
 @time: 2019-10-12 11:08
-@desc:
+@desc:导出月度统计
 '''
-from dzfp_c48 import *
-from deal_input_data import *
-from logging_class import *
-
+from month_summary.dzfp_c48 import *
+from month_summary.deal_input_data import *
 
 
 def main():
 
 
-
     info = deal_method()    # 处理输入文件的格式
-
     for ipp in info:
         if len(info[ipp][0]) != 2:
             user=info[ipp][0][2]

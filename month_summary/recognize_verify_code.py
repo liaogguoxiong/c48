@@ -7,7 +7,7 @@
 @desc:识别验证码
 '''
 
-from verification_dispose import *
+from month_summary.verification_dispose import *
 from pytesseract import image_to_string
 
 def recognize_code(path):
