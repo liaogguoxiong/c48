@@ -9,7 +9,7 @@
 import sys
 sys.path.append("..")
 from lib.dzfp_c48 import *
-from month_summary.deal_input_data import *
+from deal_input_data import *
 
 
 def main():

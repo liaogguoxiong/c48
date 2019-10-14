@@ -9,9 +9,9 @@
 
 from selenium import webdriver
 import time,datetime
-from month_summary.recognize_verify_code import *
+from recognize_verify_code import *
 from selenium.webdriver.support.select import Select
-from month_summary.logging_class import *
+from logging_class import *
 
 class c48_sys():
 
@@ -260,6 +260,11 @@ class c48_sys():
         rz.log("\n\n\n")
         time.sleep(2)
         return status
+
+
+
+    def purchase_fp(self):
+        pass
 
 
 

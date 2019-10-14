@@ -6,7 +6,9 @@
 @time: 2019-10-12 17:56
 @desc:查询金税盘服务器状态
 '''
-from dzfp_c48 import *
+import sys
+sys.path.append("..")
+from lib.dzfp_c48 import *
 from deal_input_file import *
 from SEND_EMAIL import *
 
