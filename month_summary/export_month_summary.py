@@ -6,7 +6,9 @@
 @time: 2019-10-12 11:08
 @desc:导出月度统计
 '''
-from month_summary.dzfp_c48 import *
+import sys
+sys.path.append("..")
+from lib.dzfp_c48 import *
 from month_summary.deal_input_data import *
 
 

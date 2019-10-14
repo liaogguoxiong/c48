@@ -38,6 +38,8 @@ class c48_sys():
         verify_code_path="C:/2/verfy_code.png"  # 保存验证码的图片的位置
 
         self.driver.get(self.login_url) #打开url
+        m="登录的url为:{}".format(self.login_url)
+        rz.log(m)
         self.driver.implicitly_wait(8)  # 隐形等待8秒,等待浏览器加载完
         self.driver.maximize_window()   # 浏览器窗口最大化
 
@@ -168,7 +170,7 @@ class c48_sys():
             mon = 12
 
         self.driver.get(huizong_url)
-        m="打开月度统计的界面"
+        m="打开[月度统计]的界面"
         rz.log(m)
         self.driver.implicitly_wait(8)
         time.sleep(1)
@@ -216,7 +218,7 @@ class c48_sys():
         f_list=os.listdir(f_path)           # 列出保存pdf路径下的所有文件,是一个列表
         m8="{}导出pdf文件成功".format(shuihao)
         m9="{}导出pdf文件失败".format(shuihao)
-        exist=1 # 用作判断是否找到的标志,0为找到,1为没找到
+        exist=1     # 用作判断是否找到的标志,0为找到,1为没找到
 
         for name in f_list:
             if shuihao in name:
@@ -224,18 +226,18 @@ class c48_sys():
                 exist=0
 
         if exist !=0:
-            rz.log(m9,40)   # 下载目录下找不到相关税号的pdf文件
+            rz.log(40,m9)   # 下载目录下找不到相关税号的pdf文件
 
 
 
-    def service_status(self,shuihao):
+    def service_status(self,shuihao,name):
         """
         查看金税盘的服务状态
-        需要传入公司的税号
+        需要传入公司的税号,名称
         :param shuihao:公司的税号
         :return:
         """
-        m1="打开{}的服务状态页面....".format(shuihao)
+        m1="打开{}的[服务状态监控]页面....".format(shuihao)
         m2="输入税号{}".format(shuihao)
         m3="点击查询"
 
@@ -253,7 +255,9 @@ class c48_sys():
         rz.log(m3)
         time.sleep(2)
         status=self.driver.find_element_by_xpath("/html[1]/body[1]/form[2]/div[2]/table[1]/tbody[1]/tr[1]/td[6]/span[1]").text
-        m4="获取到{}的服务状态为:{}".format(shuihao,status)
+        m4="获取到{}的服务状态为:{}".format(name,status)
+        rz.log(m4)
+        rz.log("\n\n\n")
         time.sleep(2)
         return status
 
@@ -262,20 +266,19 @@ class c48_sys():
     def close_browse(self):
         time.sleep(3)
         self.driver.quit()
-
-# ipp="192.168.20.212:8081"
-# shuihao="911100000828144374"
-# fjh="1"
+        m="关闭{}页面".format(self.login_url)
+        rz.log(m)
+        rz.log("\n\n\n")
 
 
 
 """
 初始化日志
 """
-log_path = "D:/python_project/c48/month_summary/log.log"     #日志的保存路径
-rz=rizhi()     # 实例化日志的对象
-rz.send_to_file(log_path)     # 输出到日志文件中
-rz.send_to_stdout()        #输出到屏幕
+log_path = "D:/python_project/c48/log.log"     # 日志的保存路径
+rz=rizhi()                                     # 实例化日志的对象
+rz.send_to_file(log_path)                      # 输出到日志文件中
+rz.send_to_stdout()                            # 输出到屏幕
 
 
 

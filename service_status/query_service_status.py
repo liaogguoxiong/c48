@@ -46,13 +46,14 @@ def main():
         if service_status[company_name] != normal_value:
             subject="{}的服务状态不正常".format(company_name)
             mes="{}的服务状态为:{}".format(company_name,service_status[company_name])
+            rz.log(subject,30)
+            rz.log(mes,30)
             sm.email_heading(subject)
             sm.send_text(mes,"plain")
             sm.send_mail()
+            rz.log("邮件发送成功")
 
-        else:
-            mes="所有服务状态都正常"
-            rz.log("mes")
+
 
 
 
